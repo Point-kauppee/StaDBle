@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StaDBleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Horse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StableId" Type="int" />
+          <Property Name="Identifier" Type="nvarchar" MaxLength="100" />
+          <Property Name="Links" Type="int" />
+        </EntityType>
+        <EntityType Name="Stable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="int" />
+          <Property Name="Identifier" Type="nvarchar" MaxLength="100" />
+          <Property Name="Links" Type="int" />
+          <Property Name="Stalls" Type="int" />
+        </EntityType>
+        <Association Name="FK_Horse_ToTable">
+          <End Role="Stable" Type="Self.Stable" Multiplicity="0..1" />
+          <End Role="Horse" Type="Self.Horse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Horse">
+              <PropertyRef Name="StableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StaDBleModelStoreContainer">
+          <EntitySet Name="Horse" EntityType="Self.Horse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stable" EntityType="Self.Stable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Horse_ToTable" Association="Self.FK_Horse_ToTable">
+            <End Role="Stable" EntitySet="Stable" />
+            <End Role="Horse" EntitySet="Horse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StaDBleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Horse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StableId" Type="Int32" />
+          <Property Name="Identifier" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Links" Type="Int32" />
+          <NavigationProperty Name="Stable" Relationship="Self.FK_Horse_ToTable" FromRole="Horse" ToRole="Stable" />
+        </EntityType>
+        <EntityType Name="Stable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="Int32" />
+          <Property Name="Identifier" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Links" Type="Int32" />
+          <Property Name="Stalls" Type="Int32" />
+          <NavigationProperty Name="Horses" Relationship="Self.FK_Horse_ToTable" FromRole="Stable" ToRole="Horse" />
+        </EntityType>
+        <Association Name="FK_Horse_ToTable">
+          <End Role="Stable" Type="Self.Stable" Multiplicity="0..1" />
+          <End Role="Horse" Type="Self.Horse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Horse">
+              <PropertyRef Name="StableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StaDBleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Horses" EntityType="Self.Horse" />
+          <EntitySet Name="Stables" EntityType="Self.Stable" />
+          <AssociationSet Name="FK_Horse_ToTable" Association="Self.FK_Horse_ToTable">
+            <End Role="Stable" EntitySet="Stables" />
+            <End Role="Horse" EntitySet="Horses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StaDBleModelStoreContainer" CdmEntityContainer="StaDBleEntities">
+          <EntitySetMapping Name="Horses">
+            <EntityTypeMapping TypeName="StaDBleModel.Horse">
+              <MappingFragment StoreEntitySet="Horse">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StableId" ColumnName="StableId" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+                <ScalarProperty Name="Links" ColumnName="Links" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stables">
+            <EntityTypeMapping TypeName="StaDBleModel.Stable">
+              <MappingFragment StoreEntitySet="Stable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+                <ScalarProperty Name="Links" ColumnName="Links" />
+                <ScalarProperty Name="Stalls" ColumnName="Stalls" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

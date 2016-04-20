@@ -81,6 +81,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -199,6 +201,27 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Database\Horse.cs">
+      <DependentUpon>StaDBleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Stable.cs">
+      <DependentUpon>StaDBleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\StaDBleModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StaDBleModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\StaDBleModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StaDBleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\StaDBleModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StaDBleModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,6 +234,17 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Database\Database creation.sql" />
+    <Content Include="Database\StaDBleModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StaDBleModel.edmx</DependentUpon>
+      <LastGenOutput>StaDBleModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Database\StaDBleModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StaDBleModel.edmx</DependentUpon>
+      <LastGenOutput>StaDBleModel.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -221,6 +255,13 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Database\StaDBleModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StaDBleModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Database\StaDBleModel.edmx.diagram">
+      <DependentUpon>StaDBleModel.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\StaDBleWebApp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -284,6 +325,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
