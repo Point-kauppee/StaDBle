@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+@section scripts {
+<script src="~/Scripts/Application/Logic.js"></script>
+
+    <script>
+        $(function () {
+            initHorseAssignment();
+        })
+    </script>
+
+    }
+
+<h2>Test Json Interface</h2>
+<p>
+    <input id="HorseCode" type="text" placeholder="horse code"/>
+</p>
+
+<button id="AssingHorseButton"> Lisää Hevonen</button>

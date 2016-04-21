@@ -18,6 +18,11 @@ namespace StaDBleWebApp.Controllers
             return View();
         }
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
         // GET: StaDBle/Details/5
         public ActionResult Details(int id)
         {
