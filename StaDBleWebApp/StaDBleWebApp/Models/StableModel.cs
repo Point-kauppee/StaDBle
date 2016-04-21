@@ -7,8 +7,7 @@ namespace StaDBleWebApp.Models
 {
     public class StableModel
     {
-        public string StableCode { get; set; }
-
+        public string StableCode {get; set;}
         public string HorseCode { get; set; }
     }
 }
